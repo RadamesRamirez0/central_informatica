@@ -1,0 +1,261 @@
+@using System.ComponentModel.DataAnnotations
+@using central_informatica.src.Client.Services
+@using central_informatica.src.Shared.DTOs
+@using central_informatica.src.Shared.Models
+@using central_informatica.src.Client.Components.ui
+@inject PersonasService PersonasService
+@inject ToastService ToastService
+
+<ConfirmDialog IsOpen="@modalOpened" Title="¿Seguro que quieres continuar?" CancelText="Cancelar"
+    ConfirmText="Confirmar" Icon="warning" Type="warning" Message="¿Estás seguro que deseas continuar con esta acción?"
+    OnCancelCallback="()=> modalOpened = false" OnConfirmCallback="()=> ConfirmDelete(editingId.Value)" />
+
+<SearchBox SearchTerm="@Busqueda" OnSearch="HandleSearch" />
+
+@if (isLoading)
+{
+    <LoadingState />
+}
+else if (errorMessage != null)
+{
+    <ErrorState ErrorMessage="@errorMessage" OnRetry="LoadPersonas" />
+}
+else
+{
+    <table class="bg-gray-100 w-full rounded-xl overflow-hidden px-1 text-center">
+        <thead class="[&_th]:px-3 text-gray-400 font-medium">
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Apellido Paterno</th>
+                <th>Apellido Materno</th>
+                <th>Fecha de Nacimiento</th>
+                <th>Sexo</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody class="[&_th]:px-2">
+            @foreach (var persona in personas)
+            {
+                @if (persona.ID == 0 && creatingNew || persona.ID == editingId)
+                {
+                    <PersonaEditRow PersonaId="@persona.ID" @bind-Nombre="Nombre" @bind-ApellidoPaterno="ApellidoPaterno"
+                        @bind-ApellidoMaterno="ApellidoMaterno" @bind-FechaNacimiento="FechaNacimiento" @bind-Sexo="Sexo"
+                        OnSave="@(() => creatingNew ? SaveNew() : SaveEdit())" OnCancel="@(() => HandleCancel(persona))" />
+                }
+                else
+                {
+                    <PersonaRow Persona="@persona" OnEdit="OnEdit" OnDelete="OnDelete" />
+                }
+            }
+        </tbody>
+        <AddPersonaButton OnAdd="OnAdd" />
+    </table>
+}
+
+@code {
+    List<Persona> personas = new();
+    bool isLoading = true;
+    string? errorMessage = null;
+    int? editingId = null;
+    bool creatingNew = false;
+    bool modalOpened = false;
+    string? Busqueda { get; set; }
+
+    // Variables para inputs de edicion
+    string? Nombre { get; set; }
+    string? ApellidoPaterno { get; set; }
+    string? ApellidoMaterno { get; set; }
+    DateTime? FechaNacimiento { get; set; }
+    char? Sexo { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadPersonas();
+    }
+
+    private async Task LoadPersonas()
+    {
+        try
+        {
+            isLoading = true;
+            errorMessage = null;
+            StateHasChanged();
+
+            personas = await PersonasService.GetAllAsync(Busqueda);
+        }
+        catch (Exception ex)
+        {
+            errorMessage = ex.Message;
+            personas = new List<Persona>();
+        }
+        finally
+        {
+            isLoading = false;
+            StateHasChanged();
+        }
+    }
+
+    private void OnEdit(int id)
+    {
+        editingId = id;
+        var currentPersona = personas.Where(p => p.ID == id).FirstOrDefault();
+
+        if (currentPersona == null)
+        {
+            return;
+        }
+
+        Nombre = currentPersona.Nombre;
+        ApellidoPaterno = currentPersona.ApellidoPaterno;
+        ApellidoMaterno = currentPersona.ApellidoMaterno;
+        FechaNacimiento = currentPersona.FechaNacimiento;
+        Sexo = currentPersona.Sexo;
+
+        StateHasChanged();
+    }
+
+    private async Task SaveEdit()
+    {
+        if (editingId == null || Nombre == null || ApellidoMaterno == null || ApellidoPaterno == null || FechaNacimiento == null
+        || Sexo == null)
+        {
+            ToastService.Show("Faltan valores", ToastType.Error);
+            return;
+        }
+
+        PersonaDTO dto = new()
+        {
+            Nombre = Nombre,
+            ApellidoPaterno = ApellidoPaterno,
+            ApellidoMaterno = ApellidoMaterno,
+            FechaNacimiento = FechaNacimiento.Value,
+            Sexo = Sexo.Value
+        };
+
+        try
+        {
+            var persona = await PersonasService.UpdateAsync(editingId.Value, dto);
+
+            if (persona == null)
+            {
+                ToastService.Show("Ocurrió un error al editar", ToastType.Info);
+                return;
+            }
+
+            ToastService.Show("Éxito al editar la persona", ToastType.Success);
+            ResetForm();
+            editingId = null;
+        }
+        catch (Exception ex)
+        {
+            ToastService.Show(ex.Message, ToastType.Error);
+        }
+        finally
+        {
+            await LoadPersonas();
+        }
+    }
+
+    private async Task ConfirmDelete(int id)
+    {
+        try
+        {
+            var persona = await PersonasService.DeleteAsync(id);
+            ToastService.Show("Persona eliminada correctamente", ToastType.Success);
+        }
+        catch (Exception ex)
+        {
+            ToastService.Show(ex.Message, ToastType.Error);
+        }
+        finally
+        {
+            modalOpened = false;
+            editingId = null;
+            await LoadPersonas();
+        }
+    }
+
+    private void OnDelete(int id)
+    {
+        editingId = id;
+        modalOpened = true;
+    }
+
+    private void OnAdd()
+    {
+        ResetForm();
+        personas.Add(new Persona());
+        creatingNew = true;
+        StateHasChanged();
+    }
+
+    private async Task SaveNew()
+    {
+        if (!creatingNew || string.IsNullOrWhiteSpace(Nombre) || string.IsNullOrWhiteSpace(ApellidoMaterno) ||
+        string.IsNullOrWhiteSpace(ApellidoPaterno) || FechaNacimiento == null || Sexo == null)
+        {
+            ToastService.Show("Faltan valores", ToastType.Error);
+            return;
+        }
+
+        PersonaDTO dto = new()
+        {
+            Nombre = Nombre,
+            ApellidoPaterno = ApellidoPaterno,
+            ApellidoMaterno = ApellidoMaterno,
+            FechaNacimiento = FechaNacimiento.Value,
+            Sexo = Sexo.Value
+        };
+
+        try
+        {
+            var persona = await PersonasService.CreateAsync(dto);
+
+            if (persona == null)
+            {
+                ToastService.Show("Ocurrió un error al crear", ToastType.Info);
+                return;
+            }
+
+            ToastService.Show("Éxito al registrar nueva persona", ToastType.Success);
+            ResetForm();
+            creatingNew = false;
+            editingId = null;
+            await LoadPersonas();
+        }
+        catch (Exception ex)
+        {
+            ToastService.Show(ex.Message, ToastType.Error);
+        }
+    }
+
+    private void ResetForm()
+    {
+        Nombre = null;
+        ApellidoPaterno = null;
+        ApellidoMaterno = null;
+        FechaNacimiento = null;
+        Sexo = null;
+    }
+
+    private async Task HandleSearch(string? value)
+    {
+        if (Busqueda != value)
+        {
+            Busqueda = value;
+            await LoadPersonas();
+        }
+    }
+
+    private void HandleCancel(Persona persona)
+    {
+        if (creatingNew)
+        {
+            creatingNew = false;
+            personas.Remove(personas.Find(p => p.ID == persona.ID)!);
+        }
+        editingId = null;
+        ResetForm();
+    }
+}

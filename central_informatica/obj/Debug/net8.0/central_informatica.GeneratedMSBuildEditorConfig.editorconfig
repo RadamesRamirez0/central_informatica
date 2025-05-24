@@ -1,0 +1,95 @@
+is_global = true
+build_property.TargetFramework = net8.0
+build_property.TargetFramework = net8.0
+build_property.TargetPlatformMinVersion = 
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.ProjectTypeGuids = 
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.RootNamespace = central_informatica
+build_property.RootNamespace = central_informatica
+build_property.ProjectDir = /Users/radamesramirez/projects/central_informatica/central_informatica/
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 
+build_property.RazorLangVersion = 8.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = /Users/radamesramirez/projects/central_informatica/central_informatica
+build_property._RazorSourceGeneratorDebug = 
+
+[/Users/radamesramirez/projects/central_informatica/central_informatica/src/Client/Components/App.razor]
+build_metadata.AdditionalFiles.TargetPath = c3JjL0NsaWVudC9Db21wb25lbnRzL0FwcC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/radamesramirez/projects/central_informatica/central_informatica/src/Client/Components/Pages/Home.razor]
+build_metadata.AdditionalFiles.TargetPath = c3JjL0NsaWVudC9Db21wb25lbnRzL1BhZ2VzL0hvbWUucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/radamesramirez/projects/central_informatica/central_informatica/src/Client/Components/Routes.razor]
+build_metadata.AdditionalFiles.TargetPath = c3JjL0NsaWVudC9Db21wb25lbnRzL1JvdXRlcy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/radamesramirez/projects/central_informatica/central_informatica/src/Client/Components/ui/AddPersonaButton.razor]
+build_metadata.AdditionalFiles.TargetPath = c3JjL0NsaWVudC9Db21wb25lbnRzL3VpL0FkZFBlcnNvbmFCdXR0b24ucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/radamesramirez/projects/central_informatica/central_informatica/src/Client/Components/ui/ConfirmDialog.razor]
+build_metadata.AdditionalFiles.TargetPath = c3JjL0NsaWVudC9Db21wb25lbnRzL3VpL0NvbmZpcm1EaWFsb2cucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/radamesramirez/projects/central_informatica/central_informatica/src/Client/Components/ui/Dialog.razor]
+build_metadata.AdditionalFiles.TargetPath = c3JjL0NsaWVudC9Db21wb25lbnRzL3VpL0RpYWxvZy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/radamesramirez/projects/central_informatica/central_informatica/src/Client/Components/ui/ErrorState.razor]
+build_metadata.AdditionalFiles.TargetPath = c3JjL0NsaWVudC9Db21wb25lbnRzL3VpL0Vycm9yU3RhdGUucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/radamesramirez/projects/central_informatica/central_informatica/src/Client/Components/ui/LoadingState.razor]
+build_metadata.AdditionalFiles.TargetPath = c3JjL0NsaWVudC9Db21wb25lbnRzL3VpL0xvYWRpbmdTdGF0ZS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/radamesramirez/projects/central_informatica/central_informatica/src/Client/Components/ui/PersonaEditRow.razor]
+build_metadata.AdditionalFiles.TargetPath = c3JjL0NsaWVudC9Db21wb25lbnRzL3VpL1BlcnNvbmFFZGl0Um93LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/radamesramirez/projects/central_informatica/central_informatica/src/Client/Components/ui/PersonaForm.razor]
+build_metadata.AdditionalFiles.TargetPath = c3JjL0NsaWVudC9Db21wb25lbnRzL3VpL1BlcnNvbmFGb3JtLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/radamesramirez/projects/central_informatica/central_informatica/src/Client/Components/ui/PersonaRow.razor]
+build_metadata.AdditionalFiles.TargetPath = c3JjL0NsaWVudC9Db21wb25lbnRzL3VpL1BlcnNvbmFSb3cucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/radamesramirez/projects/central_informatica/central_informatica/src/Client/Components/ui/PersonasTable.razor]
+build_metadata.AdditionalFiles.TargetPath = c3JjL0NsaWVudC9Db21wb25lbnRzL3VpL1BlcnNvbmFzVGFibGUucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/radamesramirez/projects/central_informatica/central_informatica/src/Client/Components/ui/SearchBox.razor]
+build_metadata.AdditionalFiles.TargetPath = c3JjL0NsaWVudC9Db21wb25lbnRzL3VpL1NlYXJjaEJveC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/radamesramirez/projects/central_informatica/central_informatica/src/Client/Components/ui/Table.razor]
+build_metadata.AdditionalFiles.TargetPath = c3JjL0NsaWVudC9Db21wb25lbnRzL3VpL1RhYmxlLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/radamesramirez/projects/central_informatica/central_informatica/src/Client/Components/ui/ToastContainer.razor]
+build_metadata.AdditionalFiles.TargetPath = c3JjL0NsaWVudC9Db21wb25lbnRzL3VpL1RvYXN0Q29udGFpbmVyLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/radamesramirez/projects/central_informatica/central_informatica/src/Client/Components/ui/ToastItem.razor]
+build_metadata.AdditionalFiles.TargetPath = c3JjL0NsaWVudC9Db21wb25lbnRzL3VpL1RvYXN0SXRlbS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/radamesramirez/projects/central_informatica/central_informatica/src/Client/Components/_Imports.razor]
+build_metadata.AdditionalFiles.TargetPath = c3JjL0NsaWVudC9Db21wb25lbnRzL19JbXBvcnRzLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 

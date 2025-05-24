@@ -1,0 +1,148 @@
+@if (IsOpen)
+{
+    <div class="fixed inset-0 z-50 overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+        <!-- Background overlay -->
+        <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+            <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" @onclick="OnCancel"></div>
+
+            <!-- This element is to trick the browser into centering the modal contents. -->
+            <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+
+            <!-- Modal panel -->
+            <div class="relative inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
+                <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                    <div class="sm:flex sm:items-start">
+                        @if (!string.IsNullOrEmpty(Icon))
+                        {
+                            <div class="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full @GetIconBackgroundClass() sm:mx-0 sm:h-10 sm:w-10">
+                                <svg class="h-6 w-6 @GetIconColorClass()" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                    @if (Icon == "warning")
+                                    {
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" />
+                                    }
+                                    else if (Icon == "danger")
+                                    {
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" />
+                                    }
+                                    else if (Icon == "info")
+                                    {
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z" />
+                                    }
+                                    else if (Icon == "success")
+                                    {
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                    }
+                                </svg>
+                            </div>
+                        }
+                        <div class="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left">
+                            @if (!string.IsNullOrEmpty(Title))
+                            {
+                                <h3 class="text-base font-semibold leading-6 text-gray-900" id="modal-title">
+                                    @Title
+                                </h3>
+                            }
+                            @if (!string.IsNullOrEmpty(Message))
+                            {
+                                <div class="mt-2">
+                                    <p class="text-sm text-gray-500">
+                                        @Message
+                                    </p>
+                                </div>
+                            }
+                            @if (ChildContent != null)
+                            {
+                                <div class="mt-2">
+                                    @ChildContent
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
+                    <button type="button"
+                            class="cursor-pointer inline-flex w-full justify-center rounded-md @GetConfirmButtonClass() px-3 py-2 text-sm font-semibold text-white shadow-sm hover:@GetConfirmButtonHoverClass() sm:ml-3 sm:w-auto"
+                            @onclick="OnConfirm">
+                        @ConfirmText
+                    </button>
+                    <button type="button"
+                            class="cursor-pointer mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto"
+                            @onclick="OnCancel">
+                        @CancelText
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@code {
+    [Parameter] public bool IsOpen { get; set; } = false;
+    [Parameter] public string Title { get; set; } = "";
+    [Parameter] public string Message { get; set; } = "";
+    [Parameter] public string ConfirmText { get; set; } = "Confirmar";
+    [Parameter] public string CancelText { get; set; } = "Cancelar";
+    [Parameter] public string Icon { get; set; } = ""; // warning, danger, info, success
+    [Parameter] public string Type { get; set; } = "primary"; // primary, danger, warning, success
+    [Parameter] public RenderFragment? ChildContent { get; set; }
+    [Parameter] public Action? OnConfirmCallback { get; set; }
+    [Parameter] public Action? OnCancelCallback { get; set; }
+
+    private async Task OnConfirm()
+    {
+        IsOpen = false;
+        OnConfirmCallback();
+    }
+
+    private async Task OnCancel()
+    {
+        IsOpen = false;
+        OnCancelCallback();
+    }
+
+    private string GetIconBackgroundClass()
+    {
+        return Icon switch
+        {
+            "warning" => "bg-yellow-100",
+            "danger" => "bg-red-100",
+            "info" => "bg-blue-100",
+            "success" => "bg-green-100",
+            _ => "bg-gray-100"
+        };
+    }
+
+    private string GetIconColorClass()
+    {
+        return Icon switch
+        {
+            "warning" => "text-yellow-600",
+            "danger" => "text-red-600",
+            "info" => "text-blue-600",
+            "success" => "text-green-600",
+            _ => "text-gray-600"
+        };
+    }
+
+    private string GetConfirmButtonClass()
+    {
+        return Type switch
+        {
+            "danger" => "bg-red-600",
+            "warning" => "bg-yellow-600",
+            "success" => "bg-green-600",
+            _ => "bg-blue-600"
+        };
+    }
+
+    private string GetConfirmButtonHoverClass()
+    {
+        return Type switch
+        {
+            "danger" => "bg-red-500",
+            "warning" => "bg-yellow-500",
+            "success" => "bg-green-500",
+            _ => "bg-blue-500"
+        };
+    }
+}

@@ -1,0 +1,23 @@
+/* _content/central_informatica/src/Client/Components/ui/Table.razor.rz.scp.css */
+table[b-j9iuzre2k4] {
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  overflow: hidden;
+  padding:0;
+}
+
+thead[b-j9iuzre2k4] {
+  background: #d7d7d7;
+  height: 100%;
+  border: none;
+}
+
+th[b-j9iuzre2k4] {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  border: none;
+}
+
+td[b-j9iuzre2k4] {
+  font-size: 16px;
+}

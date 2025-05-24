@@ -1,0 +1,33 @@
+{
+  "Files": [
+    {
+      "Id": "/Users/radamesramirez/projects/central_informatica/central_informatica/wwwroot/css/input.css",
+      "PackagePath": "staticwebassets/css/input.css"
+    },
+    {
+      "Id": "/Users/radamesramirez/projects/central_informatica/central_informatica/wwwroot/css/output.css",
+      "PackagePath": "staticwebassets/css/output.css"
+    },
+    {
+      "Id": "/Users/radamesramirez/projects/central_informatica/central_informatica/wwwroot/favicon.png",
+      "PackagePath": "staticwebassets/favicon.png"
+    },
+    {
+      "Id": "obj/Debug/net8.0/staticwebassets/msbuild.build.central_informatica.props",
+      "PackagePath": "build\\central_informatica.props"
+    },
+    {
+      "Id": "obj/Debug/net8.0/staticwebassets/msbuild.buildMultiTargeting.central_informatica.props",
+      "PackagePath": "buildMultiTargeting\\central_informatica.props"
+    },
+    {
+      "Id": "obj/Debug/net8.0/staticwebassets/msbuild.buildTransitive.central_informatica.props",
+      "PackagePath": "buildTransitive\\central_informatica.props"
+    },
+    {
+      "Id": "obj/Debug/net8.0/staticwebassets/msbuild.central_informatica.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

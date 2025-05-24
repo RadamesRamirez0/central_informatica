@@ -1,0 +1,23 @@
+@using central_informatica.src.Client.Services
+@implements IDisposable
+@inject ToastService ToastService
+
+<div class="fixed top-5 right-5 z-50 space-y-3">
+    @foreach (var toast in ToastService.Toasts)
+    {
+        <ToastItem @key="toast.Id" Message="@toast.Message" Type="@toast.Type.ToString().ToLower()"
+            OnHide="@(() => ToastService.Remove(toast.Id))" />
+    }
+</div>
+
+@code {
+    protected override void OnInitialized()
+    {
+        ToastService.OnToastsChanged += async () => await InvokeAsync(StateHasChanged);
+    }
+
+    public void Dispose()
+    {
+        ToastService.OnToastsChanged -= async () => await InvokeAsync(StateHasChanged);
+    }
+}

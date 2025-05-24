@@ -1,0 +1,33 @@
+<Dialog IsOpen="@IsOpen" Title="@Title" Message="@Message" ConfirmText="@ConfirmText" CancelText="@CancelText"
+    Icon="@Icon" Type="@Type" OnConfirmCallback="@OnConfirmCallback" OnCancelCallback="@OnCancelCallback">
+    @ChildContent
+</Dialog>
+
+@code {
+    [Parameter] public bool IsOpen { get; set; } = false;
+    [Parameter] public string Title { get; set; } = "Confirmar acción";
+    [Parameter] public string Message { get; set; } = "¿Estás seguro de que deseas continuar?";
+    [Parameter] public string ConfirmText { get; set; } = "Confirmar";
+    [Parameter] public string CancelText { get; set; } = "Cancelar";
+    [Parameter] public string Icon { get; set; } = "warning";
+    [Parameter] public string Type { get; set; } = "danger";
+    [Parameter] public RenderFragment? ChildContent { get; set; }
+    [Parameter] public Action? OnConfirmCallback { get; set; }
+    [Parameter] public Action? OnCancelCallback { get; set; }
+
+
+    public static ConfirmDialog CreateDialog(string title, string message, string confirm, string cancel, string type,
+    Action OnConfirm)
+    {
+        return new ConfirmDialog
+        {
+            Title = title,
+            Message = message,
+            ConfirmText = confirm,
+            CancelText = cancel,
+            Icon = type,
+            Type = type
+        };
+    }
+
+}

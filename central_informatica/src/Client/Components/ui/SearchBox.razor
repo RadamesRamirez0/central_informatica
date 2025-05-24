@@ -1,0 +1,42 @@
+<div class="w-[70%] flex flex-col gap-3">
+    <label for="buscador">Buscador</label>
+    <input id="buscador" class="border rounded-lg px-2 py-1 bg-white outline-none active:ring" value="@currentValue"
+        @oninput="@OnSearchChanged" />
+</div>
+
+@implements IDisposable
+
+@code {
+    [Parameter] public string? SearchTerm { get; set; }
+    [Parameter] public EventCallback<string?> OnSearch { get; set; }
+
+    private string? currentValue;
+    private Timer? debounceTimer;
+
+    protected override void OnParametersSet()
+    {
+        currentValue = SearchTerm;
+    }
+
+    private void OnSearchChanged(ChangeEventArgs e)
+    {
+        currentValue = e.Value?.ToString();
+
+        // Cancelar el timer anterior si existe
+        debounceTimer?.Dispose();
+
+        // Crear un nuevo timer que se ejecute después de 300ms
+        debounceTimer = new Timer(async _ =>
+        {
+            await InvokeAsync(async () =>
+    {
+            await OnSearch.InvokeAsync(currentValue);
+        });
+        }, null, 300, Timeout.Infinite);
+    }
+
+    public void Dispose()
+    {
+        debounceTimer?.Dispose();
+    }
+}

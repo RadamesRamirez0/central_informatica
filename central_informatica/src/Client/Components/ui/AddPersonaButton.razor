@@ -1,0 +1,19 @@
+<tfoot>
+    <tr class="group cursor-pointer" @onclick="OnAdd">
+        <td colspan="2">
+            <button
+                class="mx-2 cursor-pointer text-gray-200 hover:text-blue-500 group-hover:text-blue-500 transition-colors">
+                + Agregar persona
+            </button>
+        </td>
+        <td colspan="5">
+            <div
+                class="mx-2 cursor-pointer border-t grow text-gray-200 hover:text-blue-500 group-hover:text-blue-500 transition-colors">
+            </div>
+        </td>
+    </tr>
+</tfoot>
+
+@code {
+    [Parameter] public EventCallback OnAdd { get; set; }
+}

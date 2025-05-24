@@ -1,0 +1,77 @@
+@using central_informatica.src.Shared.Models
+
+<td><input value="@Nombre" @oninput="@((e) => OnNombreChanged(e.Value?.ToString()))" /></td>
+<td><input value="@ApellidoPaterno" @oninput="@((e) => OnApellidoPaternoChanged(e.Value?.ToString()))" /></td>
+<td><input value="@ApellidoMaterno" @oninput="@((e) => OnApellidoMaternoChanged(e.Value?.ToString()))" /></td>
+<td><input value="@(FechaNacimiento?.ToString("yyyy-MM-dd"))"
+        @onchange="@((e) => OnFechaNacimientoChanged(e.Value?.ToString()))" type="date" /></td>
+<td>
+    <select value="@Sexo" @onchange="@((e) => OnSexoChanged(e.Value?.ToString()))">
+        <option value="">Seleccionar...</option>
+        <option value="M">Masculino</option>
+        <option value="F">Femenino</option>
+    </select>
+</td>
+
+@code {
+    [Parameter] public string? Nombre { get; set; }
+    [Parameter] public EventCallback<string?> NombreChanged { get; set; }
+
+    [Parameter] public string? ApellidoPaterno { get; set; }
+    [Parameter] public EventCallback<string?> ApellidoPaternoChanged { get; set; }
+
+    [Parameter] public string? ApellidoMaterno { get; set; }
+    [Parameter] public EventCallback<string?> ApellidoMaternoChanged { get; set; }
+
+    [Parameter] public DateTime? FechaNacimiento { get; set; }
+    [Parameter] public EventCallback<DateTime?> FechaNacimientoChanged { get; set; }
+
+    [Parameter] public char? Sexo { get; set; }
+    [Parameter] public EventCallback<char?> SexoChanged { get; set; }
+
+    private async Task OnNombreChanged(string? value)
+    {
+        Nombre = value;
+        await NombreChanged.InvokeAsync(value);
+    }
+
+    private async Task OnApellidoPaternoChanged(string? value)
+    {
+        ApellidoPaterno = value;
+        await ApellidoPaternoChanged.InvokeAsync(value);
+    }
+
+    private async Task OnApellidoMaternoChanged(string? value)
+    {
+        ApellidoMaterno = value;
+        await ApellidoMaternoChanged.InvokeAsync(value);
+    }
+
+    private async Task OnFechaNacimientoChanged(string? value)
+    {
+        if (DateTime.TryParse(value, out var fecha))
+        {
+            FechaNacimiento = fecha;
+            await FechaNacimientoChanged.InvokeAsync(fecha);
+        }
+        else
+        {
+            FechaNacimiento = null;
+            await FechaNacimientoChanged.InvokeAsync(null);
+        }
+    }
+
+    private async Task OnSexoChanged(string? value)
+    {
+        if (!string.IsNullOrEmpty(value) && char.TryParse(value, out var sexo))
+        {
+            Sexo = sexo;
+            await SexoChanged.InvokeAsync(sexo);
+        }
+        else
+        {
+            Sexo = null;
+            await SexoChanged.InvokeAsync(null);
+        }
+    }
+}

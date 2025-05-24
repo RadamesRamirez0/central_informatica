@@ -1,0 +1,77 @@
+{
+  "Version": 1,
+  "Hash": "3xbVJ9UYLY7NlMUfHzdfGkSG7XlgJhTNBv6gqwfVwl4=",
+  "Source": "central_informatica",
+  "BasePath": "_content/central_informatica",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [
+    {
+      "Name": "central_informatica/wwwroot",
+      "Source": "central_informatica",
+      "ContentRoot": "/Users/radamesramirez/projects/central_informatica/central_informatica/wwwroot/",
+      "BasePath": "_content/central_informatica",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": [
+    {
+      "Identity": "/Users/radamesramirez/projects/central_informatica/central_informatica/wwwroot/css/input.css",
+      "SourceId": "central_informatica",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/radamesramirez/projects/central_informatica/central_informatica/wwwroot/",
+      "BasePath": "_content/central_informatica",
+      "RelativePath": "css/input.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/css/input.css"
+    },
+    {
+      "Identity": "/Users/radamesramirez/projects/central_informatica/central_informatica/wwwroot/css/output.css",
+      "SourceId": "central_informatica",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/radamesramirez/projects/central_informatica/central_informatica/wwwroot/",
+      "BasePath": "_content/central_informatica",
+      "RelativePath": "css/output.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/css/output.css"
+    },
+    {
+      "Identity": "/Users/radamesramirez/projects/central_informatica/central_informatica/wwwroot/favicon.png",
+      "SourceId": "central_informatica",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/radamesramirez/projects/central_informatica/central_informatica/wwwroot/",
+      "BasePath": "_content/central_informatica",
+      "RelativePath": "favicon.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/favicon.png"
+    }
+  ]
+}
