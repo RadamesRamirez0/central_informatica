@@ -24,6 +24,13 @@ builder.Services.AddHttpClient<central_informatica.src.Client.Services.PersonasS
     client.BaseAddress = new Uri("http://localhost:5199/");
 });
 
+builder.WebHost.ConfigureKestrel(
+    (ctx, opts) =>
+    {
+        opts.ListenLocalhost(5199);
+    }
+);
+
 var app = builder.Build();
 
 // Initialize static Toast class
